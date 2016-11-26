@@ -19,12 +19,12 @@ class NewsDAO(object):
     def __init__(self):
         pass
 
-    def save_news(self, link, title, content, written_time, craw_time=datetime.datetime.now()):
+    def save_news(self, link, title, content, written_time):
         saved = False
         session = Session()
         if not self.get_news_by_id(link):
             #print link
-            news = News(link=link, title=title, content=content, written_time=written_time, crawl_time=crawl_time)
+            news = News(link=link, title=title, content=content, written_time=written_time, crawl_time=datetime.datetime.now())
             session.add(news)
             session.commit()
             saved = True
@@ -53,7 +53,7 @@ class NewsDAO(object):
                             .filter(News.link == news_id).first()
             return result.content
         except Exception as e:
-            print e
+            print '21', e
 
         finally:
             session.close()
