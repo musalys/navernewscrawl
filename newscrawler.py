@@ -9,6 +9,7 @@ import requests
 import json
 import re
 from bs4 import BeautifulSoup
+from newsdao import NewsDAO
 
 
 class NaverNewsCrawler(object):
@@ -67,17 +68,23 @@ class NaverNewsCrawler(object):
             content = content_re.strip()
             written_time = soup.find('span', attrs={"class": "t11"}).get_text()
 
-            #print link
-            #print str(title)
-            #print str(content)
-            #print str(written_time)
-            #print '-' * 80
+            print link
+            print str(title)
+            print str(content)
+            print str(written_time)
+            print '-' * 80
+
+            self.newsdao.save_news(link, str(title.encode('utf-8')), str(content.encode('utf-8')), str(written_time.encode('utf-8')))
 
         except Exception as e:
             print '2', e
 
 
 home = 'http://news.naver.com'
-newsdao = 'kit'
-crawler = NaverNewsCrawler(newsdao, home)
-crawler.get_topics()
+
+if __name__ == '__main__':
+    #memcache = MemCache()
+    newsdao = NewsDAO()
+
+    crawler = NaverNewsCrawler(newsdao, home)
+    crawler.get_topics()
