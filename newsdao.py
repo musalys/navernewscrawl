@@ -58,7 +58,7 @@ class NewsDAO(object):
         finally:
             session.close()
 
-    def get_news_by_keyword_content(self, keyword):
+    def get_news_by_keyword_in_content(self, keyword):
         data = []
         session = Session()
         subquery = session.query(News)

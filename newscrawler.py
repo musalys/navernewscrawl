@@ -74,7 +74,7 @@ class NaverNewsCrawler(object):
             print str(written_time)
             print '-' * 80
 
-            self.newsdao.save_news(link, str(title.encode('utf-8')), str(content.encode('utf-8')), str(written_time.encode('utf-8')))
+            self.newsdao.save_news(link, str(title), str(content), written_time)
 
         except Exception as e:
             print '2', e
