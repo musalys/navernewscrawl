@@ -40,7 +40,7 @@ def search_news(keyword):
     # else:
     #     data = {'result' : '인증에 실패하였습니다.'}
     data = newsdao.get_news_by_keyword_in_content(str(keyword))
-    
+
     return jsonify(data)
 
 
