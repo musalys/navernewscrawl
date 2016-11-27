@@ -67,11 +67,12 @@ class NaverNewsCrawler(object):
             content_re = re.sub(r'//.+\n.+{}', '', content)
             content = content_re.strip()
             written_time = soup.find('span', attrs={"class": "t11"}).get_text()
+            written_time = datetime.datetime.strptime(written_time, "%Y-%m-%d %H:%M")
 
             print link
             print str(title)
             print str(content)
-            print str(written_time)
+            print written_time
             print '-' * 80
 
             self.newsdao.save_news(link, str(title), str(content), written_time)
