@@ -5,7 +5,7 @@ sys.setdefaultencoding('utf-8')
 
 import uuid
 
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, json, Response
 from newsdao import NewsDAO
 #from commentdao import CommentDAO
 #from memcache import MemCache
@@ -13,6 +13,7 @@ from newsdao import NewsDAO
 from konlpy.tag import Kkma
 
 app = Flask(__name__)
+app.config['JSON_AS_ASCII'] = False
 
 
 @app.route('/')
@@ -40,7 +41,7 @@ def search_news(keyword):
     # else:
     #     data = {'result' : '인증에 실패하였습니다.'}
     data = newsdao.get_news_by_keyword_in_content(str(keyword))
-
+    #return json.dumps(data, ensure_ascii=False).encode('utf8')
     return jsonify(data)
 
 
