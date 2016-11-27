@@ -14,5 +14,5 @@ class News(Base):
     link            = Column(String(200), primary_key = True, nullable = False)
     title           = Column(String(100), nullable = False)
     content         = Column(TEXT, nullable = False)
-    written_time    = Column(String(50), nullable = False)
+    written_time    = Column(DateTime, nullable = False)
     crawl_time      = Column(DateTime, nullable = False)
